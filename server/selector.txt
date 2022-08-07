@@ -1,0 +1,23 @@
+User name:
+('article > div > div._aata > div > div > div._aasx > div._aat6 > ul > div > li > div > div > div._a9zr > h2 > div:nth-child(1) > span > a').textContent
+
+Caption:
+('article > div > div._aata > div > div > div._aasx > div._aat6 > ul > div > li > div > div > div._a9zr > div._a9zs > span').textContent
+
+Likes:
+('article > div > div._aata > div > div > div._aasx > section._aam_._aat4 > div > div > div > a > div > span').textContent
+
+Post time:
+('article > div > div._aata > div > div > div._aasx > div._aat8 > div > div > a > div > time._aaqe').dateTime
+
+Comment user:
+('article > div > div._aata > div > div > div._aasx > div._aat6 > ul > ul:nth-child(2) > div > li > div > div > div._a9zr > h3 > div > span > a').textContent
+
+Comment text:
+('article > div > div._aata > div > div > div._aasx > div._aat6 > ul > ul:nth-child(2) > div > li > div > div > div._a9zr > div._a9zs > span').textContent
+
+Post section:
+('div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > article > div')
+
+Next post:
+('div._aaqg._aaqh > button')
