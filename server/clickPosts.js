@@ -1,10 +1,10 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 
-const hashtag = "hongkong";
+const hashtag = "cathaypacific"; //all lowercase
 const username = "dadalawdd"; //cecilee32 dadalawdd
 const password = "dalaw01"; //cecil05  dalaw01
-const postsAmount = 5;
+const postsAmount = 150;
 
 const clickPost = async (page, postsAmount) => {
   let items = [];
@@ -15,12 +15,12 @@ const clickPost = async (page, postsAmount) => {
     );
 
     for (const topPost of topPosts) {
-      let post_link = "Null";
-      let author_id = "Null";
-      let post_message = "Null";
-      let reaction_like = "Null";
-      let comment_count = "Null";
-      let post_timestamp = "Null";
+      let post_link = null;
+      let author_id = null;
+      let post_message = null;
+      let reaction_like = null;
+      let comment_count = null;
+      let post_timestamp = null;
 
       try {
         post_link = await page.url();
@@ -32,7 +32,7 @@ const clickPost = async (page, postsAmount) => {
         author_id = await page.evaluate(
           (el) =>
             el.querySelector(
-              "article > div > div._aa-d > div > div > div._aepp > div > header > div._aaqy._aaqz > div._aar0._ad95._aar1 > div._aaqt"
+              "article > div > div > div > div > div > div > ul > div > li > div > div > div > h2 > div > span > a"
             ).textContent,
           topPost
         );
@@ -44,7 +44,7 @@ const clickPost = async (page, postsAmount) => {
         post_message = await page.evaluate(
           (el) =>
             el.querySelector(
-              "div._aa-9 > ul > div > li > div > div > div._a9zr > div._a9zs > span"
+              "article > div > div > div > div > div > div > ul > div > li > div > div > div > div > span"
             ).textContent,
           topPost
         );
@@ -56,7 +56,7 @@ const clickPost = async (page, postsAmount) => {
         reaction_like = await page.evaluate(
           (el) =>
             el.querySelector(
-              "div._aaz4 > section._aa-7 > div > div > div > a > div > span"
+              "article > div > div._ae65 > div > div > div._ae2s._ae3v._ae3w > section > div > div > div > a > div > span"
             ).textContent,
           topPost
         );
@@ -68,7 +68,7 @@ const clickPost = async (page, postsAmount) => {
         comment_count = await page.evaluate(
           (el) =>
             el.querySelectorAll(
-              "div._aa-d > div > div > div._aaz4 > div._aa-9 > ul > ul"
+              "article > div > div > div > div > div > div > ul > ul"
             ).length,
           topPost
         );
@@ -81,7 +81,7 @@ const clickPost = async (page, postsAmount) => {
         post_timestamp = await page.evaluate(
           (el) =>
             el.querySelector(
-              "div._aaz4 > div._aa-b > div > div > a > div > time"
+              "article > div > div > div > div > div > div > div > div > a > div > time"
             ).dateTime,
           topPost
         );
@@ -185,7 +185,7 @@ async function start() {
     if (items.length === postsAmount) {
       try {
         await page.click(
-          "div:nth-child(4) > div > div > div.rq0escxv.l9j0dhe7.du4w35lb > div > div.o9tjht9c.jar9mtx6.mbzxb4f5.njoytozt > div > div ",
+          "div > div > div > div > div > div > div > div > div.x10l6tqk.x160vmok.x1eu8d0j.x1vjfegm > div",
           {
             waitFor: 2000,
           }
@@ -193,13 +193,14 @@ async function start() {
       } catch (error) {
         console.log("close tab error");
       }
-
+      // icon nav
       await page.click(
-        "section > nav > div._acc1._acc3 > div > div > div._acuq._acur > div > div:nth-child(6) > div._aaav",
+        "div.x9f619.x1n2onr6.x1ja2u2z > div > div > div > div.x78zum5.xdt5ytf.x10cihs4.x1t2pt76.x1n2onr6.x1ja2u2z > div.x9f619.xnz67gz.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.x1q0g3np.xqjyukv.x1qjc9v5.x1oa3qoh.x1qughib > div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x1qjc9v5.x1oa3qoh.x1nhvcw1.xeq5yr9.x1dr59a3.xixxii4.x13vifvy.x1n327nk > div > div > div > div > div.xhuyl8g.xl5mz7h",
         { waitFor: 2000 }
       );
+      // logout button
       await page.click(
-        "div._aa1s > div._ad8j._aa5x._aa5y._aa5z > div._aa61 > div:nth-child(6)",
+        "div.xhuyl8g.xl5mz7h > div > div > div.x10l6tqk.xy75b87 > div > div._aa61 > div:nth-child(5)",
         { waitFor: 2000 }
       );
       await page.waitFor(3000);
